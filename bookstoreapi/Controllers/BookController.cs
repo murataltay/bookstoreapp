@@ -59,12 +59,12 @@ namespace bookstoreapi.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateBook (int id, [FromBody] UpdateBookModel book)
         {
-            var vm = new UpdateBookCommand(_context);
-            vm.BookId = id;
-            vm.model = book;
+            var command = new UpdateBookCommand(_context);
+            command.BookId = id;
+            command.model = book;
             UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
-            validator.ValidateAndThrow(vm);
-            vm.Handle();
+            validator.ValidateAndThrow(command);
+            command.Handle();
 
             return Ok();
         }
